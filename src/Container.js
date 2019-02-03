@@ -17,7 +17,8 @@ export default class DialogContainer extends React.PureComponent {
     contentStyle: PropTypes.object,
     footerStyle: PropTypes.object,
     headerStyle: PropTypes.object,
-    visible: PropTypes.bool
+    visible: PropTypes.bool,
+    keyboardAvoidBehaviorIOS: PropTypes.string,
   };
 
   static defaultProps = {
@@ -33,6 +34,7 @@ export default class DialogContainer extends React.PureComponent {
       footerStyle = {},
       headerStyle = {},
       visible,
+      keyboardAvoidBehaviorIOS,
       ...otherProps
     } = this.props;
     const titleChildrens = [];
@@ -75,7 +77,7 @@ export default class DialogContainer extends React.PureComponent {
         {...otherProps}
       >
         <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          behavior={Platform.OS === "ios" ? (keyboardAvoidBehaviorIOS || "padding") : undefined}
           style={styles.container}
         >
           <View style={[styles.content, contentStyle]}>
